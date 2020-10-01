@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" 
+        href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" 
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" 
+        crossorigin="anonymous">
+        <link href="style.css" rel = "stylesheet"> 
+    </head>
+    <body>
+        <div id ="topBar"><h1 style ="margin: 0px">Lab-2 "Notes"</h1></div>
+        <div id = "mainPage">
+            <div id="leftCol">
+                <ul id="noteList"></ul>
+            </div>
+            <div id="rightCol">
+                <form id="textInputForm">
+                    <input type="text" id="inputName">
+                    <input type="button" id="buttonAdd" value="Save">
+                    <input type="button" id="buttonDelete" value="Delete">
+                    <textarea id="inputMessage"></textarea>
+                </form>
+            </div>
+        </div>
+
+        <template id="noteCardTemplate">
+            <li class="noteListItem" onclick="noteOpened(this.id)">
+                <div class="noteListItemName">
+                    <h4>Example</h4>
+                </div>
+                <div class="noteListItemDate">
+                    <h4>Date</h4>
+                </div>
+            </li>
+        </template>
+
+        <script src="makeId.js"></script>
+        <script src="note.js"></script>
+        <script src="listItem.js"></script>
+        <script src="storage.js"></script>
+        <script src="index.js"></script>
+    </body>
+</html>
