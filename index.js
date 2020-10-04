@@ -2,16 +2,24 @@ let userAdd = document.querySelector("#buttonAdd");
 let userDelete = document.querySelector("#buttonDelete");
 let userName = document.querySelector("#inputName");
 let userMessage = document.querySelector("#inputMessage");
-let urlManager = new URLSearchParams(window.location.search);
-
-let noteID = "";
-
 let mainList = document.querySelector("#noteList");
+
 let loadedNotes = storageReadAll();
+loadAllNotes();
+
+let noteID = findID();
+
+if(noteID)
+{
+    noteOpened(noteID);
+}
+else
+{
+    setURL();
+}
 
 userAdd.onclick = ()=>
 {
-    noteID=urlManager.get("id");
     if(noteID=="")
     {
         let newNote = new Note(makeid(6), userName.value, userMessage.value);
@@ -38,8 +46,7 @@ userAdd.onclick = ()=>
 
 userDelete.onclick=()=>
 {
-    noteID=urlManager.get("id");
-    if(!noteID)
+    if(noteID=="")
     {
         userName.value ="";
         userMessage.value =""; 
@@ -88,7 +95,6 @@ function noteOpened(id)
 
 function setURL() 
 {
-    urlManager.set("id",noteID);
     let newURL = window.location.href;
     if(newURL.includes("?"))
     {
@@ -120,18 +126,14 @@ function clearUp()
     setURL();
 }
 
-window.onload = () =>
+function findID()
 {
-    loadAllNotes();
-    noteID=urlManager.get("id");
-    if(noteID)
+    let newURL = window.location.href;
+    if(newURL.includes("?")&&(!newURL.includes("null")))
     {
-        noteOpened(noteID);
+        return newURL.slice(-6);
     }
-    else
-    {
-        setURL();
-    }
+    return "";
 }
 
 window.onunload = ()=>
